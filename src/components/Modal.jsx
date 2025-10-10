@@ -1,30 +1,33 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import Button from './Button';
+import Button from "./Button";
 
-const Modal = forwardRef(function Modal({ children, buttonCaption }, ref) {
-    const dialogRef = useRef(null);
+const Modal = function Modal({ open, children, buttonCaption, onClose }) {
+  const dialogRef = useRef(null);
 
-    function openDialog() {
-        dialogRef.current?.showModal();
+  useEffect(() => {
+    const modal = dialogRef.current;
+
+    if (open) {
+      modal?.showModal();
+    } else {
+      modal?.close();
     }
+  }, [open]);
 
-    useImperativeHandle(ref, () => ({
-        openDialog,
-    }), []);
-
-    return createPortal(
-        <dialog 
-        ref={dialogRef} 
-        className="backdrop:bg-stone-900/90 p-6 rounded-md shadow-md"
-        >
-            {children}
-            <form method="dialog" className="text-right mt-4">
-                <Button>{buttonCaption}</Button>
-            </form>
-        </dialog>,
-        document.getElementById("modal-root")
-    );
-});
+  return createPortal(
+    <dialog
+      ref={dialogRef}
+      className="backdrop:bg-stone-900/90 p-6 rounded-md shadow-md"
+      onClose={onClose}
+    >
+      {children}
+      <form method="dialog" className="text-right mt-4">
+        <Button onClick={onClose}>{buttonCaption}</Button>
+      </form>
+    </dialog>,
+    document.getElementById("modal-root")
+  );
+};
 
 export default Modal;

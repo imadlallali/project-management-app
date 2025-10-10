@@ -15,7 +15,7 @@ export default function SideBar({
       <Button onClick={onStartAddProject}>
         + Add Project</Button>
       </div>
-      <ul className="mt-8">
+      <ul className="mt-8 overflow-y-auto max-h-[calc(100vh-200px)] pr-2">
         {projects.map(project => {
           let cssClasses = 'px-2 py-1 w-full text-left rounded-sm hover:bg-stone-800 hover:text-stone-200';
           if (project.id === selectedProjectId) {
