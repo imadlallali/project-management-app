@@ -1,10 +1,31 @@
-export default function Input({ label, textarea, ...props }) {
-const classes = "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600";
+import { forwardRef } from "react";
 
-  return <p className="flex flex-col gap-1 my-4">
-    <label className="text-sm font-bold uppercase text-stone-5=="> {label} </label>
-    {textarea ? 
-    <textarea className={classes}{...props} /> 
-    : <input className={classes}{...props} />} 
-  </p>
-};
+const Input = forwardRef(function Input({ label, textarea, className = "", ...props }, ref) {
+  const baseClasses = "input-field";
+  const textareaClasses = "min-h-[120px] resize-y";
+  
+  const classes = `${baseClasses} ${textarea ? textareaClasses : ''} ${className}`;
+
+  return (
+    <div className="space-y-2">
+      <label className="input-label">
+        {label}
+      </label>
+      {textarea ? (
+        <textarea 
+          className={classes}
+          ref={ref}
+          {...props} 
+        />
+      ) : (
+        <input 
+          className={classes}
+          ref={ref}
+          {...props} 
+        />
+      )}
+    </div>
+  );
+});
+
+export default Input;

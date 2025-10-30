@@ -1,14 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Input from "./Input";
-import Modal from "./Modal";
+import Button from "./Button";
+import { Save, AlertTriangle, CheckCircle } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function NewProject({ onAdd, onCancel }) {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
 
   function handleSave() {
     const enteredTitle = title.current.value;
@@ -20,7 +19,9 @@ export default function NewProject({ onAdd, onCancel }) {
       enteredDescription.trim() === "" ||
       enteredDueDate.trim() === ""
     ) {
-      setIsModalOpen(true);
+      toast.error('Please fill out all fields!', {
+        icon: <AlertTriangle className="w-4 h-4" />,
+      });
       return;
     }
 
@@ -30,81 +31,71 @@ export default function NewProject({ onAdd, onCancel }) {
       dueDate: enteredDueDate,
     });
 
-    // Show success notification
-    setShowNotification(true);
-    setIsExiting(false);
+    // Show success toast
+    toast.success('Project created successfully!', {
+      icon: <CheckCircle className="w-4 h-4" />,
+    });
 
     // Clear the form
     title.current.value = "";
     description.current.value = "";
     dueDate.current.value = "";
 
-    // Start fade out after 2.5 seconds
-    setTimeout(() => {
-      setIsExiting(true);
-      // Hide notification and navigate after fade-out completes
-      setTimeout(() => {
-        setShowNotification(false);
-        onCancel(); // Navigate back to project list
-      }, 500); // Wait for fade-out animation to complete
-    }, 1000);
+    // Navigate back immediately
+    onCancel();
   }
-
-  function handleCloseModal() {
-    setIsModalOpen(false);
-  }
-
-  console.log(isModalOpen);
 
   return (
-    <>
-      <Modal buttonCaption="Okay" open={isModalOpen} onClose={handleCloseModal}>
-        <h2 className="text-xl font-bold text-stone-700 mb-4">Invalid input</h2>
-        <p className="text-stone-600 mb-4">
-          Please fill out all fields before saving the project.
+    <div className="max-w-2xl mx-auto h-full flex flex-col">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold gradient-text mb-2">Create New Project</h1>
+        <p className="text-slate-600">
+          Set up your project details and start organizing your work efficiently.
         </p>
-      </Modal>
-
-      <div className="w-[35rem] mt-16">
-        <menu className="flex items-center justify-end gap-4 my-4">
-          <li>
-            <button
-              className="px-6 py-2 rounded-md bg-stone-200 text-stone-800 hover:text-stone-950"
-              onClick={onCancel}
-            >
-              Cancel
-            </button>
-          </li>
-          <li>
-            <button
-              className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950"
-              onClick={handleSave}
-            >
-              Save
-            </button>
-          </li>
-        </menu>
-        <div>
-          <Input type="text" ref={title} label="Title" />
-          <Input ref={description} label="Description" textarea />
-          <Input type="date" ref={dueDate} label="Due Date" />
-        </div>
-        {/* Success Toast Notification */}
-        {showNotification && (
-          <div
-            className={`fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-500 ease-in-out ${
-              isExiting
-                ? "opacity-0 translate-y-2"
-                : "opacity-100 translate-y-0 animate-pulse"
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              <span>✅</span>
-              <span className="font-medium">Project created successfully!</span>
-            </div>
-          </div>
-        )}
       </div>
-    </>
+
+      {/* Form */}
+      <div className="flex-1 space-y-6">
+        <Input 
+          type="text" 
+          ref={title} 
+          label="Project Title" 
+          placeholder="Enter a descriptive project name..."
+        />
+        <Input 
+          ref={description} 
+          label="Description" 
+          textarea 
+          placeholder="Describe your project goals and objectives..."
+        />
+        <Input 
+          type="date" 
+          ref={dueDate} 
+          label="Due Date"
+        />
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex items-center justify-end gap-4 pt-8 border-t border-slate-200/50">
+        <Button
+          onClick={onCancel}
+          variant="secondary"
+          className="px-6 py-3"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleSave}
+          variant="primary"
+          className="px-8 py-3"
+        >
+          <span className="flex items-center gap-2">
+            <Save className="w-4 h-4" />
+            Save Project
+          </span>
+        </Button>
+      </div>
+    </div>
   );
 }

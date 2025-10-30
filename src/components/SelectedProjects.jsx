@@ -1,11 +1,15 @@
 import Tasks from "./Tasks";
+import Button from "./Button";
+import ProgressBar from "./ProgressBar";
+import { Trash2, AlertCircle, Clock, Calendar, FileText, TrendingUp } from 'lucide-react';
 
 export default function SelectedProject({
   project,
   onDelete,
   onAddTask,
   onDeleteTask,
-  tasks,
+  onToggleTask,
+  tasks = [],
 }) {
   const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US", {
     year: "numeric",
@@ -13,26 +17,100 @@ export default function SelectedProject({
     day: "numeric",
   });
 
+  const daysUntilDue = Math.ceil((new Date(project.dueDate) - new Date()) / (1000 * 60 * 60 * 24));
+  const isOverdue = daysUntilDue < 0;
+  const isUrgent = daysUntilDue <= 3 && daysUntilDue >= 0;
+
+  const projectTasks = tasks ? tasks.filter(task => task.projectId === project.id) : [];
+  const completedTasks = projectTasks.filter(task => task.completed);
+  const progress = projectTasks.length > 0 ? (completedTasks.length / projectTasks.length) * 100 : 0;
+
   return (
-    <div className="w-[35rem] mt-16">
-      <header className="pb-4 mb-4 border-b-2 border-stone-300">
-        <div className="flex items-center justify-between mb-2">
-          <h1 className="text-3xl font-bold mb-2 text-stone-600">
-            {project.title}
-          </h1>
-          <button
-            className="text-stone-600 hover:text-stone-950"
+    <div className="h-full flex flex-col fade-in">
+      {/* Project Header */}
+      <header className="mb-8">
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold gradient-text mb-3">
+              {project.title}
+            </h1>
+            <div className="flex items-center gap-4 mb-4">
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${
+                isOverdue 
+                  ? 'bg-red-100 text-red-700 border border-red-200' 
+                  : isUrgent 
+                    ? 'bg-yellow-100 text-yellow-700 border border-yellow-200'
+                    : 'bg-blue-100 text-blue-700 border border-blue-200'
+              }`}>
+                {isOverdue ? (
+                  <AlertCircle className="w-4 h-4" />
+                ) : isUrgent ? (
+                  <Clock className="w-4 h-4" />
+                ) : (
+                  <Calendar className="w-4 h-4" />
+                )}
+                <span>
+                  {isOverdue 
+                    ? `Overdue by ${Math.abs(daysUntilDue)} day${Math.abs(daysUntilDue) !== 1 ? 's' : ''}`
+                    : daysUntilDue === 0 
+                      ? 'Due today'
+                      : `${daysUntilDue} day${daysUntilDue !== 1 ? 's' : ''} left`
+                  }
+                </span>
+              </div>
+              <div className="text-sm text-slate-500 flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                Due: {formattedDate}
+              </div>
+            </div>
+          </div>
+          <Button
             onClick={() => onDelete(project.id)}
+            variant="danger"
+            className="ml-4 px-4 py-2"
           >
-            Delete
-          </button>
+            <span className="flex items-center gap-2">
+              <Trash2 className="w-4 h-4" />
+              Delete
+            </span>
+          </Button>
         </div>
-        <p className="mb-4 text-stone-400">Due Date: {formattedDate}</p>
-        <p className="text-stone-600 whitespace-pre-wrap">
-          {project.description}
-        </p>
+
+        {/* Progress Section */}
+        <div className="glass-card p-6 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <TrendingUp className="w-5 h-5 text-indigo-600" />
+            <h3 className="font-semibold text-slate-700">Project Progress</h3>
+          </div>
+          <ProgressBar 
+            tasks={projectTasks} 
+            size="large" 
+            showDetails={true}
+          />
+        </div>
+
+        {/* Description */}
+        <div className="glass-card p-6">
+          <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <FileText className="w-4 h-4" />
+            Project Description
+          </h3>
+          <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+            {project.description}
+          </p>
+        </div>
       </header>
-      <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
+
+      {/* Tasks Section */}
+      <div className="flex-1 overflow-hidden">
+        <Tasks 
+          onAdd={onAddTask} 
+          onDelete={onDeleteTask} 
+          onToggle={onToggleTask}
+          tasks={projectTasks}
+          projectId={project.id}
+        />
+      </div>
     </div>
   );
 }

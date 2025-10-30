@@ -1,31 +1,60 @@
 import { useState } from "react";
+import Button from "./Button";
+import { Plus, AlertTriangle } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function NewTask({ onAdd }) {
-
-    const [Task, setTask] = useState('');
+    const [task, setTask] = useState('');
 
     function handleTaskChange(event) {
         setTask(event.target.value);
     }
 
-    function handleAddTask(){
-        if (Task.trim() === '') return;
-        onAdd(Task);
+    function handleAddTask() {
+        if (task.trim() === '') {
+            toast.error('Please enter a task description!', {
+                icon: <AlertTriangle className="w-4 h-4" />,
+            });
+            return;
+        }
+        onAdd(task);
         setTask('');
     }
 
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            handleAddTask();
+        }
+    }
+
     return (
-       <div className="flex items-center gap-4">
-        <input
-         type="text"
-         className="w-64 px-2 py-1 rounded-sm bg-stone-200 border border-stone-200 focus:outline-none focus:border-stone-600"
-         onChange={handleTaskChange}
-         value={Task}
-       />
-        <button
-         className="text-stone-800 hover:text-stone-950"
-        onClick={handleAddTask}
-         >Add Task</button>
-       </div>
+        <div className="glass-card p-4">
+            <div className="flex items-center gap-3">
+                <div className="flex-1">
+                    <input
+                        type="text"
+                        className="input-field"
+                        placeholder="What needs to be done?"
+                        onChange={handleTaskChange}
+                        onKeyPress={handleKeyPress}
+                        value={task}
+                    />
+                </div>
+                <Button
+                    onClick={handleAddTask}
+                    variant="primary"
+                    className="px-4 py-3 whitespace-nowrap"
+                    disabled={task.trim() === ''}
+                >
+                    <span className="flex items-center gap-2">
+                        <Plus className="w-4 h-4" />
+                        Add Task
+                    </span>
+                </Button>
+            </div>
+            <p className="text-xs text-slate-500 mt-2">
+                Press Enter or click "Add Task" to create a new task
+            </p>
+        </div>
     );
 }
