@@ -3,9 +3,9 @@ import NewProject from "./components/NewProject.jsx";
 import { useState } from "react";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
 import SelectedProject from "./components/SelectedProjects.jsx";
-import { Toaster } from 'react-hot-toast';
-import toast from 'react-hot-toast';
-import { CheckCircle, Trash2, Clock } from 'lucide-react';
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { CheckCircle, Trash2, Clock } from "lucide-react";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -31,7 +31,7 @@ function App() {
       };
     });
 
-    toast.success('Task added successfully!', {
+    toast.success("Task added successfully!", {
       icon: <CheckCircle className="w-4 h-4" />,
     });
   }
@@ -46,7 +46,7 @@ function App() {
       };
     });
 
-    toast.success('Task deleted successfully!', {
+    toast.success("Task deleted successfully!", {
       icon: <Trash2 className="w-4 h-4" />,
     });
   }
@@ -54,11 +54,9 @@ function App() {
   function handleToggleTask(taskId) {
     let taskBeforeToggle;
     setProjectsState((prevState) => {
-      taskBeforeToggle = prevState.tasks.find(t => t.id === taskId);
-      const updatedTasks = prevState.tasks.map((task) => 
-        task.id === taskId 
-          ? { ...task, completed: !task.completed }
-          : task
+      taskBeforeToggle = prevState.tasks.find((t) => t.id === taskId);
+      const updatedTasks = prevState.tasks.map((task) =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
       );
 
       return {
@@ -69,9 +67,15 @@ function App() {
 
     if (taskBeforeToggle) {
       toast.success(
-        taskBeforeToggle.completed ? 'Task marked as pending!' : 'Task completed!', 
+        taskBeforeToggle.completed
+          ? "Task marked as pending!"
+          : "Task completed!",
         {
-          icon: taskBeforeToggle.completed ? <Clock className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />,
+          icon: taskBeforeToggle.completed ? (
+            <Clock className="w-4 h-4" />
+          ) : (
+            <CheckCircle className="w-4 h-4" />
+          ),
         }
       );
     }
@@ -134,7 +138,7 @@ function App() {
       };
     });
 
-    toast.success('Project deleted successfully!', {
+    toast.success("Project deleted successfully!", {
       icon: <Trash2 className="w-4 h-4" />,
     });
   }
@@ -171,32 +175,31 @@ function App() {
           selectedProjectId={projectsState.selectedProject}
           tasks={projectsState.tasks}
         />
-        <div className="flex-1 glass-card p-8 overflow-auto">
-          {content}
-        </div>
+        <div className="flex-1 glass-card p-8 overflow-auto">{content}</div>
       </div>
       <Toaster
         position="bottom-right"
         toastOptions={{
           duration: 3000,
           style: {
-            background: 'rgba(255, 255, 255, 0.95)',
-            color: '#334155',
-            border: '1px solid rgba(203, 213, 225, 0.3)',
-            borderRadius: '12px',
-            backdropFilter: 'blur(12px)',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            background: "rgba(255, 255, 255, 0.95)",
+            color: "#334155",
+            border: "1px solid rgba(203, 213, 225, 0.3)",
+            borderRadius: "12px",
+            backdropFilter: "blur(12px)",
+            boxShadow:
+              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
           },
           success: {
             iconTheme: {
-              primary: '#10b981',
-              secondary: '#ffffff',
+              primary: "#10b981",
+              secondary: "#ffffff",
             },
           },
           error: {
             iconTheme: {
-              primary: '#ef4444',
-              secondary: '#ffffff',
+              primary: "#ef4444",
+              secondary: "#ffffff",
             },
           },
         }}

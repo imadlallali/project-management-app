@@ -1,6 +1,6 @@
-import noProjectImage from '../assets/no-projects.png';
-import Button from './Button.jsx';
-import { Rocket, FileText, Calendar, CheckCircle } from 'lucide-react';
+import noProjectImage from "../assets/no-projects.png";
+import Button from "./Button.jsx";
+import { Rocket, FileText, Calendar, CheckCircle } from "lucide-react";
 
 export default function NoProjectSelected({ onStartAddProject }) {
   return (
@@ -8,7 +8,7 @@ export default function NoProjectSelected({ onStartAddProject }) {
       {/* Animated Icon */}
       <div className="mb-8 float-animation">
         <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl flex items-center justify-center mb-4 shadow-lg">
-          <img 
+          <img
             src={noProjectImage}
             alt="No projects"
             className="w-12 h-12 object-contain opacity-60"
@@ -25,14 +25,15 @@ export default function NoProjectSelected({ onStartAddProject }) {
           Ready to organize your work?
         </p>
         <p className="text-slate-500">
-          Select an existing project or create a new one to get started with your productivity journey.
+          Select an existing project or create a new one to get started with
+          your productivity journey.
         </p>
       </div>
 
       {/* CTA Button */}
       <div className="space-y-4">
-        <Button 
-          onClick={onStartAddProject} 
+        <Button
+          onClick={onStartAddProject}
           variant="primary"
           className="px-8 py-4 text-lg font-semibold"
         >
@@ -41,7 +42,7 @@ export default function NoProjectSelected({ onStartAddProject }) {
             Create a New Project
           </span>
         </Button>
-        
+
         <p className="text-xs text-slate-400 mt-4">
           Transform your ideas into organized, actionable projects
         </p>
