@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
+import Modal from "./Modal";
 import { Save, AlertTriangle, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -8,6 +9,7 @@ export default function NewProject({ onAdd, onCancel }) {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
+  const [showModal, setShowModal] = useState(false);
 
   function handleSave() {
     const enteredTitle = title.current.value;
@@ -19,9 +21,7 @@ export default function NewProject({ onAdd, onCancel }) {
       enteredDescription.trim() === "" ||
       enteredDueDate.trim() === ""
     ) {
-      toast.error("Please fill out all fields!", {
-        icon: <AlertTriangle className="w-4 h-4" />,
-      });
+      setShowModal(true);
       return;
     }
 
@@ -87,6 +87,25 @@ export default function NewProject({ onAdd, onCancel }) {
           </span>
         </Button>
       </div>
+
+      {/* Error Modal */}
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        buttonCaption="OK"
+      >
+        <div className="text-center">
+          <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4">
+            <AlertTriangle className="w-6 h-6 text-red-600" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+            Missing Information
+          </h3>
+          <p className="text-sm text-slate-600">
+            Please fill out all fields before creating your project.
+          </p>
+        </div>
+      </Modal>
     </div>
   );
 }
