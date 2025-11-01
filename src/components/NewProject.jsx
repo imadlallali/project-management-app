@@ -49,7 +49,7 @@ export default function NewProject({ onAdd, onCancel }) {
     <div className="max-w-2xl mx-auto h-full flex flex-col">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold gradient-text mb-2">
+        <h1 className="text-3xl font-bold text-orange-600 mb-2">
           Create New Project
         </h1>
         <p className="text-slate-600">
@@ -76,7 +76,7 @@ export default function NewProject({ onAdd, onCancel }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-end gap-4 pt-8 border-t border-slate-200/50">
+      <div className="flex items-center justify-end gap-4 pt-8 border-t border-orange-200">
         <Button onClick={onCancel} variant="secondary" className="px-6 py-3">
           Cancel
         </Button>

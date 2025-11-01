@@ -14,17 +14,17 @@ export default function SideBar({
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center icon-glow">
+          <div className="w-10 h-10 bg-orange-700 rounded-lg flex items-center justify-center">
             <FolderKanban className="w-5 h-5 text-white" />
           </div>
-          <h1 className="text-xl font-bold gradient-text">Project Manager</h1>
+          <h1 className="text-xl font-bold text-white">Project Manager</h1>
         </div>
 
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-semibold text-lg text-slate-200">
+          <h2 className="font-semibold text-lg text-orange-100">
             Your Projects
           </h2>
-          <span className="text-xs bg-slate-700/50 text-slate-300 px-2 py-1 rounded-full">
+          <span className="text-xs bg-orange-700 text-orange-100 px-2 py-1 rounded-full">
             {projects.length}
           </span>
         </div>
@@ -41,12 +41,12 @@ export default function SideBar({
       <div className="flex-1 overflow-hidden">
         <ul className="space-y-2 h-full overflow-y-auto custom-scrollbar pr-2">
           {projects.length === 0 ? (
-            <li className="text-center py-8 text-slate-400">
+            <li className="text-center py-8 text-orange-200">
               <div className="mb-3 opacity-50">
                 <Folder className="w-8 h-8 mx-auto" />
               </div>
               <p className="text-sm">No projects yet</p>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-orange-300 mt-1">
                 Create your first project to get started
               </p>
             </li>
@@ -67,10 +67,10 @@ export default function SideBar({
               return (
                 <li key={project.id} className="project-card">
                   <button
-                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ease-out ${
+                    className={`w-full text-left p-3 rounded-lg transition-colors duration-200 ${
                       isSelected
-                        ? "bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 text-white shadow-lg"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white border border-transparent hover:border-slate-600/30"
+                        ? "bg-orange-700 text-white shadow-md"
+                        : "text-orange-100 hover:bg-orange-700/50 hover:text-white"
                     }`}
                     onClick={() => onSelectProject(project.id)}
                   >
@@ -78,8 +78,8 @@ export default function SideBar({
                       <Circle
                         className={`w-2 h-2 ${
                           isSelected
-                            ? "text-indigo-400 fill-current"
-                            : "text-slate-600"
+                            ? "text-orange-200 fill-current"
+                            : "text-orange-400"
                         }`}
                       />
                       <div className="flex-1 min-w-0">
@@ -92,7 +92,7 @@ export default function SideBar({
                               showDetails={false}
                               className="mb-1"
                             />
-                            <div className="flex items-center justify-between text-xs text-slate-400">
+                            <div className="flex items-center justify-between text-xs text-orange-200">
                               <span>
                                 {completedTasks.length}/{projectTasks.length}{" "}
                                 tasks
@@ -102,7 +102,7 @@ export default function SideBar({
                           </div>
                         )}
                         {project.dueDate && (
-                          <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                          <p className="text-xs text-orange-200 mt-1 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             Due:{" "}
                             {new Date(project.dueDate).toLocaleDateString()}
@@ -110,7 +110,7 @@ export default function SideBar({
                         )}
                       </div>
                       {isSelected && (
-                        <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse"></div>
+                        <div className="w-1.5 h-1.5 bg-orange-200 rounded-full"></div>
                       )}
                     </div>
                   </button>
@@ -122,8 +122,8 @@ export default function SideBar({
       </div>
 
       {/* Footer */}
-      <div className="mt-6 pt-4 border-t border-slate-700/50">
-        <p className="text-xs text-slate-400 text-center">
+      <div className="mt-6 pt-4 border-t border-orange-700">
+        <p className="text-xs text-orange-200 text-center">
           Manage your projects efficiently
         </p>
       </div>

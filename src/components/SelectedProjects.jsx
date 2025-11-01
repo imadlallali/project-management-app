@@ -97,10 +97,6 @@ export default function SelectedProject({
 
         {/* Progress Section */}
         <div className="glass-card p-6 mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-semibold text-slate-700">Project Progress</h3>
-          </div>
           <ProgressBar tasks={projectTasks} size="large" showDetails={true} />
         </div>
 
