@@ -20,7 +20,11 @@ export default function ProgressBar({
     if (progressPercentage === 100)
       return { status: "complete", color: "green", message: "Completed!" };
     if (progressPercentage >= 75)
-      return { status: "near-complete", color: "orange", message: "Almost done" };
+      return {
+        status: "near-complete",
+        color: "orange",
+        message: "Almost done",
+      };
     if (progressPercentage >= 50)
       return {
         status: "in-progress",

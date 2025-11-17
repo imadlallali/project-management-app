@@ -89,9 +89,7 @@ export default function Tasks({
               <li
                 key={task.id}
                 className={`task-item group transition-all duration-200 ${
-                  task.completed
-                    ? "opacity-75"
-                    : "opacity-100"
+                  task.completed ? "opacity-75" : "opacity-100"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
