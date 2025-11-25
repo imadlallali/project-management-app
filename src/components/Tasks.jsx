@@ -34,11 +34,10 @@ export default function Tasks({
           Tasks
           {tasks.length > 0 && (
             <span
-              className={`text-sm font-normal px-2 py-1 rounded-full ${
-                isAllCompleted
+              className={`text-sm font-normal px-2 py-1 rounded-full ${isAllCompleted
                   ? "bg-green-100 text-green-700"
                   : "bg-slate-100 text-slate-600"
-              }`}
+                }`}
             >
               {tasks.length}
             </span>
@@ -75,8 +74,8 @@ export default function Tasks({
       <div className="flex-1 overflow-auto">
         {tasks.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FileText className="w-6 h-6 text-orange-400" />
+            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 float-animation">
+              <FileText className="w-6 h-6 text-slate-400" />
             </div>
             <p className="text-slate-500 mb-2">No tasks yet</p>
             <p className="text-sm text-slate-400">
@@ -88,34 +87,34 @@ export default function Tasks({
             {tasks.map((task, index) => (
               <li
                 key={task.id}
-                className={`task-item group transition-all duration-200 ${
-                  task.completed ? "opacity-75" : "opacity-100"
-                }`}
+                className={`task-item group transition-all duration-300 ${task.completed
+                    ? "opacity-75 transform scale-[0.98]"
+                    : "opacity-100 transform scale-100"
+                  }`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start gap-3">
                       <button
                         onClick={() => onToggle(task.id)}
-                        className={`w-5 h-5 border-2 rounded mt-0.5 flex items-center justify-center transition-colors duration-200 cursor-pointer ${
-                          task.completed
-                            ? "bg-green-500 border-green-500 text-white hover:bg-green-600"
-                            : "border-orange-300 hover:border-orange-400 text-orange-400 hover:bg-orange-50"
-                        }`}
+                        className={`w-5 h-5 border-2 rounded mt-0.5 flex items-center justify-center transition-all duration-300 cursor-pointer transform hover:scale-110 ${task.completed
+                            ? "bg-green-500 border-green-500 text-white hover:bg-green-600 shadow-md"
+                            : "border-slate-300 hover:border-indigo-400 text-slate-400 hover:bg-indigo-50"
+                          }`}
                       >
                         {task.completed ? (
-                          <CheckSquare className="w-4 h-4" />
+                          <CheckSquare className="w-4 h-4 animate-in zoom-in duration-200" />
                         ) : (
                           <Square className="w-4 h-4" />
                         )}
                       </button>
                       <div className="flex-1">
                         <p
-                          className={`leading-relaxed break-words transition-all duration-300 ${
-                            task.completed
+                          className={`leading-relaxed break-words transition-all duration-300 ${task.completed
                               ? "line-through text-slate-500"
                               : "text-slate-700"
-                          }`}
+                            }`}
                         >
                           {task.text}
                         </p>
@@ -127,7 +126,7 @@ export default function Tasks({
                             ).toLocaleDateString()}
                           </span>
                           {task.completed && (
-                            <span className="text-xs text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span className="text-xs text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded-full animate-in slide-in-from-right duration-300 flex items-center gap-1">
                               <CheckSquare className="w-3 h-3" />
                               Completed
                             </span>
@@ -139,12 +138,18 @@ export default function Tasks({
                   <Button
                     onClick={() => onDelete(task.id)}
                     variant="ghost"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-600 hover:text-red-700 hover:bg-red-50 p-2"
+                    className="opacity-0 group-hover:opacity-100 transition-all duration-200 text-red-600 hover:text-red-700 hover:bg-red-50 p-2 transform hover:scale-105"
                   >
                     <span className="sr-only">Delete task</span>
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
+                {/* Progress celebration effect for completed tasks */}
+                {task.completed && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="w-full h-full bg-gradient-to-r from-green-100/30 to-emerald-100/30 rounded-lg animate-pulse"></div>
+                  </div>
+                )}
               </li>
             ))}
           </ul>

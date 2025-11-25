@@ -166,8 +166,8 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen bg-orange-50 p-6">
-      <div className="max-w-7xl mx-auto h-[calc(100vh-3rem)] flex gap-6 rounded-lg overflow-hidden shadow-lg">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+      <div className="max-w-7xl mx-auto h-[calc(100vh-3rem)] flex gap-6 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50">
         <SideBar
           onStartAddProject={handleStartAddProject}
           projects={projectsState.projects}
@@ -175,28 +175,30 @@ function App() {
           selectedProjectId={projectsState.selectedProject}
           tasks={projectsState.tasks}
         />
-        <div className="flex-1 bg-white p-8 overflow-auto">{content}</div>
+        <div className="flex-1 glass-card p-8 overflow-auto">{content}</div>
       </div>
       <Toaster
         position="bottom-right"
         toastOptions={{
           duration: 3000,
           style: {
-            background: "#ffffff",
+            background: "rgba(255, 255, 255, 0.95)",
             color: "#334155",
-            border: "1px solid #fed7aa",
-            borderRadius: "8px",
-            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+            border: "1px solid rgba(203, 213, 225, 0.3)",
+            borderRadius: "12px",
+            backdropFilter: "blur(12px)",
+            boxShadow:
+              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
           },
           success: {
             iconTheme: {
-              primary: "#ea580c",
+              primary: "#10b981",
               secondary: "#ffffff",
             },
           },
           error: {
             iconTheme: {
-              primary: "#dc2626",
+              primary: "#ef4444",
               secondary: "#ffffff",
             },
           },
