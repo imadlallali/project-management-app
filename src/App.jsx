@@ -166,8 +166,8 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
-      <div className="max-w-7xl mx-auto h-[calc(100vh-3rem)] flex gap-6 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto h-auto md:h-[calc(100vh-3rem)] flex flex-col md:flex-row gap-6 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50">
         <SideBar
           onStartAddProject={handleStartAddProject}
           projects={projectsState.projects}

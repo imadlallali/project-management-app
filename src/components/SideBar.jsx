@@ -10,7 +10,7 @@ export default function SideBar({
   tasks = [],
 }) {
   return (
-    <aside className="w-80 sidebar-glass text-white p-6 flex flex-col">
+    <aside className="w-full md:w-80 sidebar-glass text-white p-6 flex flex-col">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-6">
@@ -67,20 +67,18 @@ export default function SideBar({
               return (
                 <li key={project.id} className="project-card">
                   <button
-                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ease-out ${
-                      isSelected
+                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ease-out ${isSelected
                         ? "bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 text-white shadow-lg"
                         : "text-slate-300 hover:bg-white/5 hover:text-white border border-transparent hover:border-slate-600/30"
-                    }`}
+                      }`}
                     onClick={() => onSelectProject(project.id)}
                   >
                     <div className="flex items-center gap-3">
                       <Circle
-                        className={`w-2 h-2 ${
-                          isSelected
+                        className={`w-2 h-2 ${isSelected
                             ? "text-indigo-400 fill-current"
                             : "text-slate-600"
-                        }`}
+                          }`}
                       />
                       <div className="flex-1 min-w-0">
                         <p className="font-medium truncate">{project.title}</p>
