@@ -10,11 +10,14 @@ export default function Button({
   const variants = {
     default:
       "px-4 py-2 text-xs md:text-base bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100 focus:ring-stone-500",
-    primary: "btn-primary focus:ring-indigo-500",
-    secondary: "btn-secondary focus:ring-slate-300",
-    ghost: "btn-ghost focus:ring-slate-400",
+    primary:
+      "px-6 py-3 bg-stone-800 text-stone-50 hover:bg-stone-900 focus:ring-stone-500 shadow-sm",
+    secondary:
+      "px-4 py-2 bg-stone-200 text-stone-800 hover:bg-stone-300 focus:ring-stone-500",
+    ghost:
+      "px-4 py-2 text-stone-600 hover:bg-stone-100 hover:text-stone-900 focus:ring-stone-500",
     danger:
-      "bg-red-600 hover:bg-red-700 text-white px-4 py-2 shadow-lg hover:shadow-xl focus:ring-red-500",
+      "bg-red-600 hover:bg-red-700 text-white px-4 py-2 shadow-sm focus:ring-red-500",
   };
 
   const classes = `${baseClasses} ${variants[variant]} ${className}`;

@@ -166,8 +166,8 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto h-auto md:h-[calc(100vh-3rem)] flex flex-col md:flex-row gap-6 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50">
+    <main className="min-h-screen bg-stone-100 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto h-auto md:h-[calc(100vh-3rem)] flex flex-col md:flex-row gap-6 rounded-lg overflow-hidden shadow-sm border border-stone-200 bg-white">
         <SideBar
           onStartAddProject={handleStartAddProject}
           projects={projectsState.projects}
@@ -182,13 +182,11 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            background: "rgba(255, 255, 255, 0.95)",
-            color: "#334155",
-            border: "1px solid rgba(203, 213, 225, 0.3)",
-            borderRadius: "12px",
-            backdropFilter: "blur(12px)",
-            boxShadow:
-              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            background: "#fff",
+            color: "#333",
+            border: "1px solid #e5e7eb",
+            borderRadius: "8px",
+            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
           },
           success: {
             iconTheme: {

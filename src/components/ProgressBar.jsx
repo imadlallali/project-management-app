@@ -43,11 +43,11 @@ export default function ProgressBar({
 
   // Color variants
   const colorClasses = {
-    green: "from-green-500 to-emerald-600",
-    blue: "from-blue-500 to-cyan-600",
-    indigo: "from-indigo-500 to-purple-600",
-    purple: "from-purple-500 to-pink-600",
-    slate: "from-slate-400 to-slate-500",
+    green: "bg-green-600",
+    blue: "bg-blue-600",
+    indigo: "bg-indigo-600",
+    purple: "bg-purple-600",
+    slate: "bg-stone-500",
   };
 
   const backgroundClasses = {
@@ -55,7 +55,7 @@ export default function ProgressBar({
     blue: "bg-blue-50 border-blue-200",
     indigo: "bg-indigo-50 border-indigo-200",
     purple: "bg-purple-50 border-purple-200",
-    slate: "bg-slate-50 border-slate-200",
+    slate: "bg-stone-50 border-stone-200",
   };
 
   const textClasses = {
@@ -110,27 +110,15 @@ export default function ProgressBar({
       {/* Progress Bar */}
       <div className="relative">
         <div
-          className={`w-full bg-slate-200 rounded-full ${sizeClasses[size]} overflow-hidden`}
+          className={`w-full bg-stone-200 rounded-full ${sizeClasses[size]} overflow-hidden`}
         >
           <div
-            className={`${sizeClasses[size]} rounded-full bg-gradient-to-r ${colorClasses[color]} transition-all duration-700 ease-out`}
+            className={`${sizeClasses[size]} rounded-full ${colorClasses[color]} transition-all duration-500 ease-out`}
             style={{
               width: `${progressPercentage}%`,
-              boxShadow:
-                progressPercentage > 0
-                  ? "0 0 10px rgba(99, 102, 241, 0.3)"
-                  : "none",
             }}
           />
         </div>
-
-        {/* Progress indicator dot */}
-        {progressPercentage > 0 && progressPercentage < 100 && (
-          <div
-            className={`absolute top-1/2 w-2 h-2 bg-white rounded-full shadow-md transform -translate-y-1/2 transition-all duration-700 ease-out`}
-            style={{ left: `calc(${progressPercentage}% - 4px)` }}
-          />
-        )}
       </div>
 
       {/* Task breakdown (for large size) */}

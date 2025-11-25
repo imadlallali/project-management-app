@@ -60,7 +60,7 @@ export default function SelectedProject({
     <>
       <Modal open={isDeleting} onClose={handleCancelDelete} actions={
         <>
-          <Button onClick={handleCancelDelete} variant="text" className="text-slate-500 hover:text-slate-700">
+          <Button onClick={handleCancelDelete} variant="text" className="text-stone-500 hover:text-stone-700">
             Cancel
           </Button>
           <Button onClick={handleConfirmDelete} variant="danger">
@@ -68,18 +68,18 @@ export default function SelectedProject({
           </Button>
         </>
       }>
-        <h2 className="text-xl font-bold text-slate-700 mb-4">Delete Project?</h2>
-        <p className="text-slate-600 mb-4">
-          Are you sure you want to delete <span className="font-semibold text-indigo-600">{project.title}</span>?
+        <h2 className="text-xl font-bold text-stone-700 mb-4">Delete Project?</h2>
+        <p className="text-stone-600 mb-4">
+          Are you sure you want to delete <span className="font-semibold text-stone-800">{project.title}</span>?
           This action cannot be undone and will remove all associated tasks.
         </p>
       </Modal>
-      <div className="h-full flex flex-col fade-in">
+      <div className="h-full flex flex-col">
         {/* Project Header */}
         <header className="mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex-1">
-              <h1 className="text-4xl font-bold gradient-text mb-3">
+              <h1 className="text-4xl font-bold text-stone-800 mb-3">
                 {project.title}
               </h1>
               <div className="flex items-center gap-4 mb-4">
@@ -88,7 +88,7 @@ export default function SelectedProject({
                     ? "bg-red-100 text-red-700 border border-red-200"
                     : isUrgent
                       ? "bg-yellow-100 text-yellow-700 border border-yellow-200"
-                      : "bg-blue-100 text-blue-700 border border-blue-200"
+                      : "bg-stone-100 text-stone-700 border border-stone-200"
                     }`}
                 >
                   {isOverdue ? (
@@ -108,7 +108,7 @@ export default function SelectedProject({
                         } left`}
                   </span>
                 </div>
-                <div className="text-sm text-slate-500 flex items-center gap-1">
+                <div className="text-sm text-stone-500 flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
                   Due: {formattedDate}
                 </div>
@@ -129,19 +129,19 @@ export default function SelectedProject({
           {/* Progress Section */}
           <div className="glass-card p-6 mb-6">
             <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-indigo-600" />
-              <h3 className="font-semibold text-slate-700">Project Progress</h3>
+              <TrendingUp className="w-5 h-5 text-stone-600" />
+              <h3 className="font-semibold text-stone-700">Project Progress</h3>
             </div>
             <ProgressBar tasks={projectTasks} size="large" showDetails={true} />
           </div>
 
           {/* Description */}
           <div className="glass-card p-6">
-            <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <h3 className="font-semibold text-stone-700 mb-3 flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Project Description
             </h3>
-            <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+            <p className="text-stone-600 leading-relaxed whitespace-pre-wrap">
               {project.description}
             </p>
           </div>

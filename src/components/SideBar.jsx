@@ -14,10 +14,10 @@ export default function SideBar({
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center icon-glow">
-            <FolderKanban className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 bg-stone-800 rounded-lg flex items-center justify-center">
+            <FolderKanban className="w-5 h-5 text-stone-200" />
           </div>
-          <h1 className="text-xl font-bold gradient-text">Project Manager</h1>
+          <h1 className="text-xl font-bold text-stone-100">Project Manager</h1>
         </div>
 
         <div className="flex items-center justify-between mb-6">
@@ -67,17 +67,17 @@ export default function SideBar({
               return (
                 <li key={project.id} className="project-card">
                   <button
-                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ease-out ${isSelected
-                        ? "bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 text-white shadow-lg"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white border border-transparent hover:border-slate-600/30"
+                    className={`w-full text-left p-3 rounded-md transition-colors duration-200 ease-out ${isSelected
+                      ? "bg-stone-800 text-white shadow-sm"
+                      : "text-stone-400 hover:bg-stone-800/50 hover:text-stone-200"
                       }`}
                     onClick={() => onSelectProject(project.id)}
                   >
                     <div className="flex items-center gap-3">
                       <Circle
                         className={`w-2 h-2 ${isSelected
-                            ? "text-indigo-400 fill-current"
-                            : "text-slate-600"
+                          ? "text-stone-200 fill-current"
+                          : "text-stone-600"
                           }`}
                       />
                       <div className="flex-1 min-w-0">
@@ -90,7 +90,7 @@ export default function SideBar({
                               showDetails={false}
                               className="mb-1"
                             />
-                            <div className="flex items-center justify-between text-xs text-slate-400">
+                            <div className="flex items-center justify-between text-xs text-stone-500">
                               <span>
                                 {completedTasks.length}/{projectTasks.length}{" "}
                                 tasks
@@ -100,7 +100,7 @@ export default function SideBar({
                           </div>
                         )}
                         {project.dueDate && (
-                          <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                          <p className="text-xs text-stone-500 mt-1 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             Due:{" "}
                             {new Date(project.dueDate).toLocaleDateString()}
@@ -108,7 +108,7 @@ export default function SideBar({
                         )}
                       </div>
                       {isSelected && (
-                        <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse"></div>
+                        <div className="w-1.5 h-1.5 bg-stone-400 rounded-full"></div>
                       )}
                     </div>
                   </button>
@@ -120,8 +120,8 @@ export default function SideBar({
       </div>
 
       {/* Footer */}
-      <div className="mt-6 pt-4 border-t border-slate-700/50">
-        <p className="text-xs text-slate-400 text-center">
+      <div className="mt-6 pt-4 border-t border-stone-800">
+        <p className="text-xs text-stone-500 text-center">
           Manage your projects efficiently
         </p>
       </div>
