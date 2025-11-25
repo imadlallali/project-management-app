@@ -9,7 +9,6 @@ import {
   Clock,
   Calendar,
   FileText,
-  TrendingUp,
 } from "lucide-react";
 
 export default function SelectedProject({
@@ -127,11 +126,7 @@ export default function SelectedProject({
           </div>
 
           {/* Progress Section */}
-          <div className="glass-card p-6 mb-6">
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-stone-600" />
-              <h3 className="font-semibold text-stone-700">Project Progress</h3>
-            </div>
+          <div className="mb-6 border-b border-stone-200 pb-6">
             <ProgressBar tasks={projectTasks} size="large" showDetails={true} />
           </div>
 

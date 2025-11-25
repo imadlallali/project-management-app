@@ -78,39 +78,26 @@ export default function ProgressBar({
     <div className={`${className}`}>
       {showDetails && (
         <div
-          className={`px-4 py-3 rounded-lg border ${backgroundClasses[color]} mb-3`}
+          className={`flex items-center justify-between mb-2`}
         >
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              {status === "complete" ? (
-                <CheckCircle className={`w-4 h-4 ${iconClasses[color]}`} />
-              ) : status === "empty" ? (
-                <Target className={`w-4 h-4 ${iconClasses[color]}`} />
-              ) : (
-                <Clock className={`w-4 h-4 ${iconClasses[color]}`} />
-              )}
-              <span className={`font-semibold text-sm ${textClasses[color]}`}>
-                Project Progress
-              </span>
-            </div>
-            <span className={`text-sm font-bold ${textClasses[color]}`}>
-              {progressPercentage}%
+          <div className="flex items-center gap-2">
+            <span className={`font-semibold text-sm text-stone-700`}>
+              Project Progress
+            </span>
+            <span className="text-sm text-stone-500">
+              {Math.round(progressPercentage)}%
             </span>
           </div>
-
-          <div className="flex items-center justify-between text-xs mb-2">
-            <span className={textClasses[color]}>{message}</span>
-            <span className="text-slate-500">
-              {completedTasks} of {totalTasks} tasks completed
-            </span>
-          </div>
+          <span className="text-xs text-stone-500">
+            {completedTasks} of {totalTasks} tasks completed
+          </span>
         </div>
       )}
 
       {/* Progress Bar */}
       <div className="relative">
         <div
-          className={`w-full bg-stone-200 rounded-full ${sizeClasses[size]} overflow-hidden`}
+          className={`w-full bg-stone-100 rounded-full ${sizeClasses[size]} overflow-hidden`}
         >
           <div
             className={`${sizeClasses[size]} rounded-full ${colorClasses[color]} transition-all duration-500 ease-out`}
